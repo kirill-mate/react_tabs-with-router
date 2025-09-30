@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { Tab } from '../types/Tab';
 
 const currentTabs: Tab[] = [
@@ -18,13 +18,9 @@ type Props = {
 };
 
 export const TabsProvider: React.FC<Props> = ({ children }) => {
-  const [tabs, setTabs] = useState<Tab[]>([]);
+  const [tabs] = useState<Tab[]>(currentTabs);
 
-  const value = {
-    tabs: tabs,
-  };
-
-  useEffect(() => setTabs(currentTabs), []);
+  const value: { tabs: Tab[] } = { tabs };
 
   return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;
 };

@@ -10,7 +10,7 @@ export const TabsPage = () => {
     return tabs.find(tab => tab.id === tabId)?.content;
   }
 
-  function findTadIdInTabs() {
+  function isValidTabId() {
     return tabs.some(tab => tab.id === tabId);
   }
 
@@ -26,14 +26,16 @@ export const TabsPage = () => {
               data-cy="Tab"
               key={tab.id}
             >
-              <Link to={`/tabs/${tab.id}`}>{tab.title}</Link>
+              <Link to={`/tabs/${tab.id}`} data-cy="TabLink">
+                {tab.title}
+              </Link>
             </li>
           ))}
         </ul>
       </div>
 
       <div className="block" data-cy="TabContent">
-        {!tabId || !findTadIdInTabs()
+        {!tabId || !isValidTabId()
           ? 'Please select a tab'
           : getActiveTabContent()}
       </div>
